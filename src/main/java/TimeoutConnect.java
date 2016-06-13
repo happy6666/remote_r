@@ -31,8 +31,12 @@ public abstract class TimeoutConnect {
 			throws TimeoutException {
 		Thread t = new Thread(new Connect(store, host, username, password), "TimeoutConnection");
 		long t0 = System.currentTimeMillis();
+		boolean state = true;
 		while (true) {
-			t.start();
+			if (state) {
+				t.start();
+				state = false;
+			}
 			if (!t.isAlive()) {
 				break;
 			}

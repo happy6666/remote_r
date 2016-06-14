@@ -27,6 +27,7 @@ public abstract class EmailRecSend {
 
 
 	public static List<Pair> ReceiveMail() throws REXPMismatchException, MessagingException {
+		System.out.println("Receive email");
 		List<Pair> res = new ArrayList<Pair>();
 		Properties props = System.getProperties();
 		String cin = "";
@@ -36,20 +37,24 @@ public abstract class EmailRecSend {
 				// 连接到POP3服务器
 				Session ss = Session.getDefaultInstance(props, null);
 				// 向回话"请求"一个某种提供者的存储库，是一个POP3提供者
+				System.out.println("Get store");
 				store = ss.getStore(provider);
 			}
 			if (!store.isConnected()) {
 				// 连接存储库，从而可以打开存储库中的文件夹，此时是面向IMAP的
+				System.out.println("Connect to store");
 				TimeoutConnect.timeoutConnect(store, host, username, password, 10 * 1000);
 			}
 			// 打开文件夹，此时是关闭的，只能对其进行删除或重命名，无法获取关闭文件夹的信息
 			// 从存储库的默认文件夹INBOX中读取邮件
+			System.out.println("Get inbox");
 			inbox = store.getFolder("INBOX");
 			if (inbox == null) {
 				System.out.println("NO INBOX");
 				System.exit(1);
 			}
 			// 打开文件夹，读取信息
+			System.out.println("Open inbox");
 			inbox.open(Folder.READ_WRITE);
 			System.out.println("TOTAL EMAIL:" + inbox.getMessageCount());
 			// 获取邮件服务器中的邮件

@@ -39,11 +39,15 @@ public abstract class EmailRecSend {
 				// 向回话"请求"一个某种提供者的存储库，是一个POP3提供者
 				System.out.println("Get store");
 				store = ss.getStore(provider);
+			} else {
+				System.out.println("Store is ready");
 			}
 			if (!store.isConnected()) {
 				// 连接存储库，从而可以打开存储库中的文件夹，此时是面向IMAP的
 				System.out.println("Connect to store");
 				TimeoutConnect.timeoutConnect(store, host, username, password, 10 * 1000);
+			} else {
+				System.out.println("Connection is ready");
 			}
 			// 打开文件夹，此时是关闭的，只能对其进行删除或重命名，无法获取关闭文件夹的信息
 			// 从存储库的默认文件夹INBOX中读取邮件

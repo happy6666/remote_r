@@ -62,7 +62,7 @@ public class RemoteR {
 		} else {
 			Configurator.readProperties(args[0]);
 		}
-		boolean first = true;
+		boolean first;
 		while (true) {
 			first = true;
 			while (first || EmailRecSend.retry) {
@@ -79,14 +79,14 @@ public class RemoteR {
 					i++;
 				}
 				if (EmailRecSend.retry) {
-					wait(60000 * 1);
+					towait(Long.parseLong(Configurator.getProperties("retry_time")));
 				}
 			}
-			wait(60000 * 1);
+			towait(Long.parseLong(Configurator.getProperties("wait_time")));
 		}
 	}
 
-	public static void wait(int t) {
+	public static void towait(long t) {
 		try {
 			Thread.sleep(t);
 		} catch (InterruptedException e) {

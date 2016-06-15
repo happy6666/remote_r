@@ -42,7 +42,7 @@ public abstract class EmailRecSend {
 			} else {
 				System.out.println("Store is ready");
 			}
-			if (!store.isConnected()) {
+			if (!TimeoutConnect.timeoutIsConnect(store, 10 * 1000)) {
 				// 连接存储库，从而可以打开存储库中的文件夹，此时是面向IMAP的
 				System.out.println("Connect to store");
 				TimeoutConnect.timeoutConnect(store, host, username, password, 10 * 1000);

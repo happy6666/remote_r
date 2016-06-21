@@ -81,6 +81,7 @@ public abstract class TimeoutConnect {
 			}
 			if (System.currentTimeMillis() - t0 > timeout) {
 				System.out.println("IsConnect timeout");
+				throw new TimeoutException("IsConnect timeout");
 			}
 		}
 		return ic.isConnect;

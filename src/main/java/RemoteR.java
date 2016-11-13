@@ -70,6 +70,7 @@ public class RemoteR {
 				first = false;
 				List<Pair> res = EmailRecSend.ReceiveMail();
 				if (EmailRecSend.retry) {
+					towait(Long.parseLong(Configurator.getProperties("retry_time")));
 					continue;
 				}
 				List<RList> pres = predict(res);

@@ -125,6 +125,7 @@ public abstract class EmailRecSend {
 			retry = true;
 		} catch (TimeoutException e) {
 			retry = true;
+			store=null;
 		} catch (Exception e) {
 			SendEmail(cin, e.getMessage());
 			e.printStackTrace(System.err);
